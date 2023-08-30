@@ -5,7 +5,7 @@ module.exports = {
 
   },
 
-  basePath: '/pegpag-admin',
+  assetPrefix: 'http://ec2-18-222-169-213.us-east-2.compute.amazonaws.com/app/',
   webpack(config) {
     config.resolve.extensions.push('.ts', '.tsx');
     return config;
