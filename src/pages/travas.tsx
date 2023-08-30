@@ -93,7 +93,7 @@ export default function Travas() {
           <DataGrid
             getRowId={(row: any) => row?._id ? row._id : Date.now}
             rows={travas || []}
-            onRowClick={(e) => router.push('http://ec2-18-222-169-213.us-east-2.compute.amazonaws.com/travas/' + e.id)}
+            onRowClick={(e) => router.push('http://18.222.169.213/travas/' + e.id)}
             columns={columns}
             initialState={{
               pagination: {

@@ -5,7 +5,7 @@ module.exports = {
 
   },
 
-  assetPrefix: 'http://ec2-18-222-169-213.us-east-2.compute.amazonaws.com/pegpag-admin/',
+  assetPrefix: 'http://18.222.169.213/pegpag-admin/',
   webpack(config) {
     config.resolve.extensions.push('.ts', '.tsx');
     return config;

@@ -98,7 +98,7 @@ export default function Usuarios() {
           <DataGrid
             getRowId={(row: any) => row?._id ? row._id : Date.now}
             rows={usuarios || []}
-            onRowClick={(e) => router.push('http://ec2-18-222-169-213.us-east-2.compute.amazonaws.com/usuarios/' + e.id)}
+            onRowClick={(e) => router.push('http://18.222.169.213/usuarios/' + e.id)}
             columns={columns}
             initialState={{
               pagination: {

@@ -41,7 +41,7 @@ export default function Login() {
     const response = await usuariosServices.login(userName!, password!);
     dispatch(userUpdate(response))
     setLoading(false)
-    router.push('http://ec2-18-222-169-213.us-east-2.compute.amazonaws.com/acessos');
+    router.push('http://18.222.169.213/acessos');
   };
 
   const { t, i18n } = useTranslation()
