@@ -95,7 +95,7 @@ export default function Acessos() {
           <DataGrid
             getRowId={(row: any) => row?._id ? row._id : Date.now}
             rows={acessos || []}
-            onRowClick={(e) => router.push('/acessos/' + e.id)}
+            onRowClick={(e) => router.push('http://ec2-18-222-169-213.us-east-2.compute.amazonaws.com/acessos/' + e.id)}
             columns={columns}
             initialState={{
               pagination: {
