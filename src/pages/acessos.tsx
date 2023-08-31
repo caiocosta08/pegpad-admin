@@ -95,7 +95,7 @@ export default function Acessos() {
           <DataGrid
             getRowId={(row: any) => row?._id ? row._id : Date.now}
             rows={acessos || []}
-            onRowClick={(e) => router.push('http://pegpag.acutistecnologia.com/acessos/' + e.id)}
+            onRowClick={(e) => router.push('/acessos/' + e.id)}
             columns={columns}
             initialState={{
               pagination: {

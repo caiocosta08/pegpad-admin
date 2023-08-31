@@ -5,7 +5,7 @@ module.exports = {
 
   },
 
-  assetPrefix: 'http://pegpag.acutistecnologia.com/app/',
+  assetPrefix: 'http://pegpag.acutistecnologia.com/',
   webpack(config) {
     config.resolve.extensions.push('.ts', '.tsx');
     return config;

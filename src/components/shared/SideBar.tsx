@@ -54,7 +54,7 @@ export default function Sidebar() {
     const handleLogout = () => {
       dispatch(logoutUser()); // Dispara a ação que limpa todos os reducers
       dispatch(resetUser()); // Dispara a ação que limpa todos os reducers
-      router.push('http://pegpag.acutistecnologia.com/'); // Redireciona para a página inicial
+      router.push('/'); // Redireciona para a página inicial
     };
 
     return handleLogout;

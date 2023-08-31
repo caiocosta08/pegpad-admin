@@ -98,7 +98,7 @@ export default function Usuarios() {
           <DataGrid
             getRowId={(row: any) => row?._id ? row._id : Date.now}
             rows={usuarios || []}
-            onRowClick={(e) => router.push('http://pegpag.acutistecnologia.com/usuarios/' + e.id)}
+            onRowClick={(e) => router.push('/usuarios/' + e.id)}
             columns={columns}
             initialState={{
               pagination: {

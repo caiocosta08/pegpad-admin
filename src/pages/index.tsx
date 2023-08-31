@@ -41,7 +41,7 @@ export default function Login() {
     const response = await usuariosServices.login(userName!, password!);
     dispatch(userUpdate(response))
     setLoading(false)
-    router.push('http://pegpag.acutistecnologia.com/acessos');
+    router.push('/acessos');
   };
 
   const { t, i18n } = useTranslation()
