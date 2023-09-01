@@ -4,32 +4,38 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Box from '@mui/material/Box';
-import * as yup from 'yup';
 import { Input } from '@mui/material';
 import { CSSProperties, useEffect, useState } from 'react';
-import usuariosServices from '../services/usuarios';
 
-interface ModalAddProps {
+interface Field {
+  placeholder: string;
+  type?: string;
+  validation?: any;
+}
+
+interface GenericModalProps {
   open: boolean;
   handleClose: () => void;
   refresh: () => void;
-  values?: any[];
+  entityName: string;
+  entityFields: Field[];
+  onSave: (data: any) => Promise<boolean>;
 }
 
-export default function ModalAdd({ open, handleClose, values, refresh }: ModalAddProps) {
+export default function GenericModal({ 
+  open, 
+  handleClose, 
+  entityName, 
+  entityFields, 
+  onSave, 
+  refresh 
+}: GenericModalProps) {
+  
+  const [formData, setFormData] = useState<any>({});
 
-  const schema = yup.object().shape({
-    title: yup.string().required('Digite o nome do workspace'),
-  });
-  const [newProject, setNewProject] = useState({
-    titulo: "",
-    descricao: "",
-    valor: 0
-  });
-
-  const handleSaveProject = async () => {
+  const handleSaveEntity = async () => {
     try {
-      const response = await usuariosServices.register(newProject)
+      const response = await onSave(formData)
       if (response) {
         await refresh()
         handleClose()
@@ -58,12 +64,19 @@ export default function ModalAdd({ open, handleClose, values, refresh }: ModalAd
           <Grid container>
             <Grid item xs={12}>
               <Box p={3}>
-                Crie um novo projeto
+                {`Crie um novo ${entityName}`}
               </Box>
               <Box p={3}>
-                <Input style={styles.input} placeholder="Título" value={newProject.titulo} onChange={(e) => setNewProject({ ...newProject, titulo: e.target.value })} />
-                <Input style={styles.input} placeholder="Descrição" value={newProject.descricao} onChange={(e) => setNewProject({ ...newProject, descricao: e.target.value })} />
-                <Input style={styles.input} type='number' placeholder="Valor" value={newProject.valor} onChange={(e) => setNewProject({ ...newProject, valor: parseInt(e.target.value) })} />
+                {entityFields.map((field, index) => (
+                  <Input 
+                    key={index} 
+                    style={styles.input} 
+                    placeholder={field.placeholder} 
+                    type={field.type || 'text'} 
+                    value={formData[field.placeholder]} 
+                    onChange={(e) => setFormData({ ...formData, [field.placeholder]: e.target.value })} 
+                  />
+                ))}
               </Box>
             </Grid>
           </Grid>
@@ -72,7 +85,7 @@ export default function ModalAdd({ open, handleClose, values, refresh }: ModalAd
           <Button variant="text" onClick={handleClose}>
             Cancelar
           </Button>
-          <Button variant="contained" onClick={handleSaveProject}>
+          <Button variant="contained" onClick={handleSaveEntity}>
             Confirmar
           </Button>
         </DialogActions>

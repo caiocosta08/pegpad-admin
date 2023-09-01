@@ -69,6 +69,14 @@ export default function Usuarios() {
     setLoading(false)
     return data?.items || []
   };
+
+  const addUsuario = async (data: any) => {
+    setLoading(true)
+    const response: any = await usuarioServices.register(data);
+    await getUsuarios()
+    setLoading(false)
+    return response?.items || []
+  };
   useEffect(() => {
     getUsuarios()
   }, [])
@@ -92,8 +100,14 @@ export default function Usuarios() {
         <Box>
           <Button style={{ cursor: 'pointer' }} onClick={() => setModalAddVisible(true)}>Criar usuário</Button>
         </Box>
-        <ModalAdd open={modalAddVisible} handleClose={() => setModalAddVisible(false)} refresh={getUsuarios} />
-
+        <ModalAdd
+          open={modalAddVisible}
+          handleClose={() => setModalAddVisible(false)}
+          refresh={getUsuarios}
+          onSave={addUsuario}
+          entityName="Usuario"
+          entityFields={[{ placeholder: 'nome' }, { placeholder: 'qrCode' }, { placeholder: 'codigo' }]}
+        />
         <Box style={{ width: '100%', flex: 1, maxHeight: '100vh', cursor: 'pointer' }}>
           <DataGrid
             getRowId={(row: any) => row?._id ? row._id : Date.now}

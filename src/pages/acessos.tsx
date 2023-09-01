@@ -66,6 +66,15 @@ export default function Acessos() {
     setLoading(false)
     return data?.items || []
   };
+
+  // const addAcesso = async (data: any) => {
+  //   setLoading(true)
+  //   const response: any = await acessoServices.register(data);
+  //   console.log({ acessos: response })
+  //   setAcessos(response || [])
+  //   setLoading(false)
+  //   return response?.items || []
+  // };
   useEffect(() => {
     getAcessos()
   }, [])
@@ -89,7 +98,14 @@ export default function Acessos() {
         <Box>
           <Button style={{ cursor: 'pointer' }} onClick={() => setModalAddVisible(true)}>Criar acesso</Button>
         </Box>
-        <ModalAdd open={modalAddVisible} handleClose={() => setModalAddVisible(false)} refresh={getAcessos} />
+        {/* <ModalAdd
+          open={modalAddVisible}
+          handleClose={() => setModalAddVisible(false)}
+          refresh={getAcessos}
+          onSave={addAcesso}
+          entityName="Acesso"
+          entityFields={[{ placeholder: 'usuario'}]}
+        /> */}
 
         <Box style={{ width: '100%', flex: 1, maxHeight: '100vh', cursor: 'pointer' }}>
           <DataGrid

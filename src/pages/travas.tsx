@@ -49,6 +49,7 @@ import travaServices from '../services/travas';
 import { useRouter } from 'next/router';
 import { Button } from '@mui/base';
 import ModalAdd from '../components/ModalAdd';
+import travasServices from '../services/travas';
 
 
 export default function Travas() {
@@ -63,6 +64,14 @@ export default function Travas() {
     setTravas(data || [])
     setLoading(false)
     return data?.items || []
+  };
+
+  const addTrava = async (data: any) => {
+    setLoading(true)
+    const response: any = await travasServices.register(data);
+    await getTravas()
+    setLoading(false)
+    return response?.items || []
   };
   useEffect(() => {
     getTravas()
@@ -87,7 +96,14 @@ export default function Travas() {
         <Box>
           <Button style={{ cursor: 'pointer' }} onClick={() => setModalAddVisible(true)}>Criar trava</Button>
         </Box>
-        <ModalAdd open={modalAddVisible} handleClose={() => setModalAddVisible(false)} refresh={getTravas} />
+        <ModalAdd
+          open={modalAddVisible}
+          handleClose={() => setModalAddVisible(false)}
+          refresh={getTravas}
+          onSave={addTrava}
+          entityName="Trava"
+          entityFields={[{ placeholder: 'nome' }, { placeholder: 'qrCode' }, { placeholder: 'codigo' }]}
+        />
 
         <Box style={{ width: '100%', flex: 1, maxHeight: '100vh', cursor: 'pointer' }}>
           <DataGrid
